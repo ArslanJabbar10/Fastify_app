@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { prisma } from "../../lib/prisma.ts";
+import { prisma } from "../../middleware/prisma.js";
 import { randomUUID } from "crypto";
 
 export const getAllSoldProducts = async (
@@ -8,7 +8,7 @@ export const getAllSoldProducts = async (
 ) => {
   try {
     const query_params: any = req.query;
-    if (query_params) {
+    if (query_params.sellingId) {
       const all_users = await prisma.productsBought.findMany({
         where: {
           sellingId: String(query_params.sellingId),
