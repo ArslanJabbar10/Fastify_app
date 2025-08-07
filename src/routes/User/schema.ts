@@ -18,13 +18,3 @@ export const deleteUserSchema = {
     },
   },
 };
-
-export const getSpecificUserSchema = {
-  body: {
-    type: "object",
-    required: ["userId"],
-    properties: {
-      userId: { type: "string" },
-    },
-  },
-};

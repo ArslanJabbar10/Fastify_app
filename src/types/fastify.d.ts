@@ -1,10 +1,7 @@
-import { FastifyRequest, FastifyReply } from "fastify";
+import "fastify";
 
 declare module "fastify" {
   interface FastifyInstance {
-    authenticate: (
-      request: FastifyRequest,
-      reply: FastifyReply
-    ) => Promise<void>;
+    authenticate: (request: any, reply: any) => Promise<void>;
   }
 }

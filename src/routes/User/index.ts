@@ -1,32 +1,27 @@
-import { fastify, type FastifyInstance } from "fastify";
+import { type FastifyInstance } from "fastify";
 import {
   getAllUsers,
   registerUser,
   deleteUser,
   getSpecificUser,
 } from "./controller.js";
-import {
-  deleteUserSchema,
-  getSpecificUserSchema,
-  registerUserSchema,
-} from "./schema.js";
+import { deleteUserSchema, registerUserSchema } from "./schema.js";
 
 export async function userRoutes(fastify: FastifyInstance) {
-  fastify.get("", {
-    preValidation: [(fastify as any).authenticate],
+  fastify.get("/allUsers", {
     handler: getAllUsers,
   });
-  fastify.post("", {
+  fastify.post("/register", {
     schema: registerUserSchema,
     handler: registerUser,
   });
 
-  fastify.delete("", {
+  fastify.delete("delete", {
     schema: deleteUserSchema,
     handler: deleteUser,
   });
-  fastify.post("/specific", {
-    schema: getSpecificUserSchema,
+  fastify.get("/details", {
+    preValidation: [(fastify as any).authenticate],
     handler: getSpecificUser,
   });
 }

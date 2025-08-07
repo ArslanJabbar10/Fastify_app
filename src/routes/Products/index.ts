@@ -12,16 +12,16 @@ import {
 } from "./schema.js";
 
 export async function allProducts(fastify: FastifyInstance) {
-  fastify.get("", getAllProducts);
-  fastify.post("", {
+  fastify.get("/allProducts", getAllProducts);
+  fastify.post("/addProduct", {
     schema: addProductSchema,
     handler: addProduct,
   });
-  fastify.put("", {
+  fastify.put("/changeDetail", {
     schema: changeProductSchema,
     handler: changeProduct,
   });
-  fastify.delete("", {
+  fastify.delete("deleteProduct", {
     schema: deleteProductSchema,
     handler: deleteProduct,
   });

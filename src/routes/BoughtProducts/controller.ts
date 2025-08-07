@@ -2,6 +2,10 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../../middleware/prisma.js";
 import { randomUUID } from "crypto";
 
+interface JWTPayload {
+  id: string;
+}
+
 export const getAllSoldProducts = async (
   req: FastifyRequest,
   reply: FastifyReply
@@ -78,4 +82,23 @@ export const deleteASoldProduct = async (
   } catch (err) {
     console.log("err", err);
   }
+};
+
+export const getMyProducts = async (
+  req: FastifyRequest,
+  reply: FastifyReply
+) => {
+  const user = req.user as JWTPayload;
+  const user_id = user.id;
+  try {
+    const my_products = await prisma.productsBought.findMany({
+      where: { userId: user_id },
+    });
+    return reply.code(200).send(my_products);
+  } catch (err) {
+    console.log("error", err);
+  }
+  return reply.code(404).send({
+    message: "An unknown error occurred while getting user products!",
+  });
 };

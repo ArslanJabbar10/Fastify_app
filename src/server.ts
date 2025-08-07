@@ -30,6 +30,7 @@ server.register(fastifyJwt, {
 });
 
 server.decorate("authenticate", async function (request: any, reply: any) {
+  console.log("1");
   try {
     await request.jwtVerify();
   } catch (err) {
@@ -63,7 +64,7 @@ await server.register(swagger, {
 await server.register(swaggerUI, {
   routePrefix: "/docs", // Swagger UI will be served at http://localhost:3000/docs
 });
-
+console.log("2");
 // Register routes
 server.register(login, { prefix: "/auth" });
 server.register(userRoutes, { prefix: "/users" });

@@ -3,7 +3,7 @@ import { loginHandler } from "./controller.js";
 import { loginSchema } from "./schema.js";
 
 export async function login(fastify: FastifyInstance) {
-  fastify.post("", {
+  fastify.post("/login", {
     schema: loginSchema,
     handler: loginHandler,
   });

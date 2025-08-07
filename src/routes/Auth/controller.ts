@@ -16,7 +16,7 @@ export const loginHandler = async (
     return reply.code(404).send({ message: "Invalid password" });
   }
   const token = await reply.jwtSign(
-    { id: user.userId, email: user.email }
+    { id: user.userId }
     // { expiresIn: "1h" } // optional
   );
   return reply.code(200).send({ token: token });
